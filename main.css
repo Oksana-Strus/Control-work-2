@@ -1,0 +1,231 @@
+header {
+  width: 100%;
+  height: 100px;
+  background-color: grey;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 40px 0 0 20px;
+  position: fixed;
+  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.group-btns {
+  background-color: white;
+  border-radius: 5px;
+}
+
+.col {
+  width: 20px;
+  height: 70px;
+  margin: 6px 3px 6px 3px;
+  border-radius: 5px;
+}
+
+.font-arial {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.font-georgia {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.font-impact {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.font-tahoma {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.font-times-new-roman {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.font-verdana {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.font-size-12 {
+  font-size: 12px;
+}
+
+.font-size-14 {
+  font-size: 14px;
+}
+
+.font-size-16 {
+  font-size: 16px;
+}
+
+.font-size-18 {
+  font-size: 18px;
+}
+
+.font-size-20 {
+  font-size: 20px;
+}
+
+.font-size-22 {
+  font-size: 22px;
+}
+
+.font-size-25 {
+  font-size: 25px;
+}
+
+.font-size-30 {
+  font-size: 30px;
+}
+
+.cell-color-aquamarine {
+  background-color: #39c999;
+}
+
+.cell-color-teal {
+  background-color: teal;
+}
+
+.cell-color-lightgreen {
+  background-color: #71ce71;
+}
+
+.cell-color-green {
+  background-color: #2da02d;
+}
+
+.cell-color-lightblue {
+  background-color: #4ac2fa;
+}
+
+.cell-color-blue {
+  background-color: #4987fa;
+}
+
+.cell-color-violet {
+  background-color: #a974ff;
+}
+
+.cell-color-darkviolet {
+  background-color: #8f45b1;
+}
+
+.cell-color-bluegrey {
+  background-color: #344a6d;
+}
+
+.cell-color-darkbluegrey {
+  background-color: #2d3f5a;
+}
+
+.cell-color-yellow {
+  background-color: #f0e223;
+}
+
+.cell-color-orange {
+  background-color: #fdcf04;
+}
+
+.cell-color-warmorange {
+  background-color: #ffa807;
+}
+
+.cell-color-darkorange {
+  background-color: #ec600e;
+}
+
+.cell-color-pinktomato {
+  background-color: #e25454;
+}
+
+.cell-color-tomato {
+  background-color: #be2b2b;
+}
+
+.cell-color-white {
+  background-color: white;
+}
+
+.cell-color-lightgrey {
+  background-color: #e6e6e6;
+}
+
+.cell-color-grey {
+  background-color: #c5c4c4;
+}
+
+.cell-color-darkgrey {
+  background-color: #727272;
+}
+
+.cell-color-black {
+  background-color: black;
+}
+
+.bg-img {
+  margin: 10px 20px 10px 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.background-img-first {
+  background-image: url("images/nature-1.jpg");
+}
+
+.background-img-second {
+  background-image: url("images/nature-2.jpg");
+}
+
+.background-img-third {
+  background-image: url("images/nature-3.jpg");
+}
+
+.background-img-fourth {
+  background-image: url("images/nature-4.jpg");
+}
+
+.background-img-fifth {
+  background-image: url("images/nature-5.jpg");
+}
+
+.background-img-sixth {
+  background-image: url("images/nature-6.jpg");
+}
+
+.background-img-seventh {
+  background-image: url("images/nature-7.jpg");
+}
+
+.background-img-eighth {
+  background-image: url("images/nature-8.jpg");
+}
+
+.background-img-nineth {
+  background-image: url("images/nature-9.jpg");
+}
+/*# sourceMappingURL=main.css.map */
