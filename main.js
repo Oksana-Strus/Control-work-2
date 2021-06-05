@@ -1,178 +1,3 @@
-// $(document).ready(() => {
-
-//     function goToSection(id) {
-//         $('.link').removeClass('active');
-//         $(`.link[href='${id}']`).addClass('active');
-//     }
-
-//     var sectionId = window.location.hash.split('#').pop();
-//     goToSection(`#${sectionId}`)
-
-//     $('.link').click(function () {
-//         const ID = $(this).attr('href');
-//         const OFFSET = $(ID).offset().top;
-
-//         goToSection(ID)
-
-//         $('html').animate({
-//             scrollTop: OFFSET
-//         }, 1000)
-//     })
-
-//     $('.arrow').click(function () {
-//         const ID = $(this).attr('href');
-//         const OFFSET = $(ID).offset().top;
-
-//         goToSection(ID);
-
-//         $('html').animate({
-//             scrollTop: OFFSET
-//         }, 1000)
-//     })
-
-//     $('a').mouseover(function () {
-//         $(this).css("backgroundColor", "white");
-//         $(this).find('.add-window-for-panel').css("visibility", "visible");
-//     })
-
-
-//     $('a').mouseout(function () {
-//         $(this).css("backgroundColor", "");
-//         $(this).find('.add-window-for-panel').css("visibility", "hidden");
-//     })
-
-//     $('.arrow').mouseover(function () {
-//         $(this).css("color", "black");
-//         $(this).css("backgroundColor", "transparent")
-//     })
-
-//     $('.arrow').mouseout(function () {
-//         $(this).css("color", "")
-//     })
-// })
-
-
-const WRAPPER = document.querySelector('.wrapper');
-const TEXT = document.querySelectorAll('.text');
-const BOLD_TEXT_BUTTON = document.getElementById('bold-text-button');
-const ITALIC_TEXT_BUTTON = document.getElementById('italic-text-button');
-const UNDERLINE_TEXT_BUTTON = document.getElementById('underline-text-button');
-const STRIKE_THROUGH_TEXT_BUTTON = document.getElementById('strike-through-text-button');
-const TEXT_ALIGN_LEFT = document.getElementById('text-align-left');
-const TEXT_ALIGN_CENTER = document.getElementById('text-align-center');
-const TEXT_ALIGN_RIGHT = document.getElementById('text-align-right');
-const ARIAL = document.getElementById('arial');
-const GEORGIA = document.getElementById('georgia');
-const IMPACT = document.getElementById('impact');
-const TAHOMA = document.getElementById('tahoma');
-const TIMES_NEW_ROMAN = document.getElementById('times-new-roman');
-const VERDANA = document.getElementById('verdana');
-const FONT_DROPDOWN_ITEMS = document.querySelectorAll('.dropdown-item-font');
-const SIZE_DROPDOWN_ITEMS = document.querySelectorAll('.dropdown-item-size');
-const COLOR_CELLS = document.querySelectorAll('.color-cell');
-const BACKGROUND_COLOR_CELLS = document.querySelectorAll('.background-color-cell');
-const BG_IMGS = document.querySelectorAll('.bg-img');
-
-
-
-BOLD_TEXT_BUTTON.addEventListener('click', function () {
-    TEXT.forEach(text => {
-        if (text.style.fontWeight == "") {
-            text.style.fontWeight = 'bold'
-        } else {
-            text.style.fontWeight = ''
-        }
-    })
-})
-
-ITALIC_TEXT_BUTTON.addEventListener('click', function () {
-    TEXT.forEach(text => {
-        if (text.style.fontStyle == "") {
-            text.style.fontStyle = 'italic'
-        } else {
-            text.style.fontStyle = ''
-        }
-    })
-})
-
-UNDERLINE_TEXT_BUTTON.addEventListener('click', function () {
-    TEXT.forEach(text => {
-        if (text.style.textDecoration == "") {
-            text.style.textDecoration = 'underline'
-        } else {
-            text.style.textDecoration = ''
-        }
-    })
-})
-
-STRIKE_THROUGH_TEXT_BUTTON.addEventListener('click', function () {
-    TEXT.forEach(text => {
-        if (text.style.textDecoration == "") {
-            text.style.textDecoration = 'line-through'
-        } else {
-            text.style.textDecoration = ''
-        }
-    })
-})
-
-TEXT_ALIGN_LEFT.addEventListener('click', function () {
-    WRAPPER.style.alignItems = 'flex-start'
-})
-
-TEXT_ALIGN_CENTER.addEventListener('click', function () {
-    // console.log('click')
-    WRAPPER.style.alignItems = 'center'
-})
-TEXT_ALIGN_RIGHT.addEventListener('click', function () {
-    WRAPPER.style.alignItems = 'flex-end'
-})
-
-
-FONT_DROPDOWN_ITEMS.forEach(fontDropdownItem => {
-    fontDropdownItem.addEventListener('click', function () {
-        TEXT.forEach(text => {
-            text.style.fontFamily = getComputedStyle(this).fontFamily;
-        })
-    })
-})
-
-
-SIZE_DROPDOWN_ITEMS.forEach(sizeDropdownItem => {
-    sizeDropdownItem.addEventListener('click', function () {
-        TEXT.forEach(text => {
-            text.style.fontSize = getComputedStyle(this).fontSize;
-        })
-    })
-})
-
-COLOR_CELLS.forEach(colorCell => {
-    colorCell.addEventListener('click', function () {
-        TEXT.forEach(text => {
-            text.style.color = getComputedStyle(this).backgroundColor;
-        })
-    })
-})
-
-BACKGROUND_COLOR_CELLS.forEach(backgroundColorCell => {
-    backgroundColorCell.addEventListener('click', function () {
-        TEXT.forEach(text => {
-            text.style.backgroundColor = getComputedStyle(this).backgroundColor;
-        })
-    })
-})
-
-BG_IMGS.forEach(bgImg => {
-    bgImg.addEventListener('click', function () {
-        // TEXT.forEach(text=>{
-        //     text.style.backgroundImage = getComputedStyle(this).backgroundImage;
-        // })
-        WRAPPER.style.backgroundImage = getComputedStyle(this).backgroundImage;
-      
-        
-    })
-})
-
-
 // Завдання
 // Необхідно розробити наступний функціонал як на відео TextEditor2.0, а саме:
 // ⦁	Кнопка “B” задає жирність тексту, другий клік її забирає;
@@ -202,3 +27,217 @@ BG_IMGS.forEach(bgImg => {
 // ⦁	Валідація полів;
 // ⦁	Повинно все працювати.
 // Завдання можe бути реалізоване з використанням jQuery.
+
+
+let active = true;
+let isBold, isItalic, isUnderline, isStrikeThroughText = false;
+
+$('#uploadFile').on('change', function (event) {
+    let file = this.files[0];
+    let reader = new FileReader();
+    reader.onloadend = function () {
+        $('#wrapper').css('background-image', 'url("' + reader.result + '")');
+    }
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+});
+
+$('#btnSignOut').on('click', function () {
+    console.log('lllllllll')
+    $("#btn-close-lock").css('display', 'block');
+    $("#btn-open-lock").css('display', 'none');
+    $('#open-tables').attr('disabled', true);
+
+})
+
+$('#open-tables').on('click', function () {
+    $(".content").css('display', 'none');
+    $("#edit-content").css('display', 'block');
+    $('#edit-content').val($(".content").html());
+    $('#edit-toolbar').removeClass('hidden-toolbar');
+    $('#style-toolbar').addClass('hidden-toolbar');
+})
+
+$('#save-changes-btn').on('click', function () {
+    $("#edit-content").css('display', 'none');
+    $(".content").css('display', 'block');
+    $(".content").html($('#edit-content').val());
+
+    $('#edit-toolbar').addClass('hidden-toolbar');
+    $('#style-toolbar').removeClass('hidden-toolbar');
+})
+//submit for all inputs
+$('[type="submit"]').on('click', function () {
+    $(this)
+        .closest('form')
+        .find('[required]')
+        .addClass('required');
+
+    let form = $(this).closest('form');
+    if (form[0].checkValidity()) {
+        form.removeClass('invalid');
+    } else {
+        form.addClass('invalid');
+    }
+});
+//Form for creating table
+$('#createTableForm').on('submit', function (event) {
+    event.preventDefault()
+    event.stopPropagation()
+
+    let countTR = event.target.elements['countTr'].value;
+    let countTD = event.target.elements['countTd'].value;
+    let widthTD = event.target.elements['widthTd'].value;
+    let heightTD = event.target.elements['heigthTd'].value;
+    let widthBorder = event.target.elements['widthBorder'].value;
+    let styleBorder = event.target.elements['styleBorder'].value;
+    let colorBorder = event.target.elements['colorBorder'].value;
+
+    let table = $('<table></table>');
+
+    for (let i = 0; i < countTR; i++) {
+        let tr = $('<tr>');
+        table.append(tr);
+        for (let j = 0; j < countTD; j++) {
+            let td = $('<td>').css({
+                'width': `${widthTD}`,
+                'heigth': `${heightTD}`,
+                'border': `${widthBorder}px ${styleBorder} ${colorBorder} `
+            }).append('TD');
+            tr.append(td);
+        }
+    }
+    $("#edit-content").val($("#edit-content").val() + table.prop('outerHTML'));
+})
+//Form for creating OL list
+$('#OlWithLiForm').on('submit', function (event) {
+    event.preventDefault()
+    event.stopPropagation()
+
+    let count = event.target.elements['count'].value;
+    let style = event.target.elements['style'].value;
+
+    let messageAboutInputValue = $('.messageAboutInputValue');
+
+    if (count == '' || style == '') {
+        messageAboutInputValue.css('color', 'red');
+        messageAboutInputValue.html('Invalid value')
+    } else {
+        let ol = $('<ol>').css('list-style-type', `${style}`);
+        for (let i = 1; i <= count; i++) {
+            let li = $('<li>').append('item' + i);
+            ol.append(li);
+        }
+        messageAboutInputValue.html('');
+        $("#edit-content").val($("#edit-content").val() + ol.prop('outerHTML'));
+    }
+})
+//Form for creating UL list
+
+$('#UlWithLiForm').on('submit', function (event) {
+    event.preventDefault()
+    event.stopPropagation()
+
+    let count = event.target.elements['count'].value;
+    let style = event.target.elements['style'].value;
+    let messageAboutInputValue = $('.messageAboutInputValueUl');
+
+    if (count == '' || style == '') {
+        messageAboutInputValue.css('color', 'red');
+        messageAboutInputValue.html('Invalid value')
+    } else {
+        let ul = $('<ul>').css('list-style-type', `${style}`);
+        for (let i = 1; i <= count; i++) {
+            let li = $('<li>').append('item' + i);
+            ul.append(li);
+        }
+        messageAboutInputValue.html('');
+        $("#edit-content").val($("#edit-content").val() + ul.prop('outerHTML'));
+    }
+})
+//Form for registration
+$('#signInForm').on('submit', function (event) {
+    event.preventDefault()
+    event.stopPropagation()
+
+    if (!event.target.checkValidity()) {
+
+        let password = event.target.elements['password'].value;
+        let email = event.target.elements['email'].value;
+        let validationMessage = $('#sign-form-validation-message')
+        validationMessage.css('color', 'red');
+        validationMessage.html('Please check your login or password');
+
+        if (password == '' && email == '') {
+            validationMessage.css('color', 'red');
+            validationMessage.html('Value is empty');
+        }
+    } else {
+        $('#open-tables').attr('disabled', false);
+        $("#btn-close-lock").css('display', 'none');
+        $("#btn-open-lock").css('display', 'block');
+        $('#signInModal').modal('hide');
+    }
+
+    event.target.classList.add('was-validated')
+})
+
+//text style
+$('#italic-text-button').on('click', function () {
+    isItalic = !isItalic;
+    $('.text').css('font-style', isItalic ? 'italic' : '')
+})
+
+
+$('#bold-text-button').on('click', function () {
+    isBold = !isBold;
+    $('.text').css('font-weight', isBold ? 'bold' : '')
+})
+
+$('#underline-text-button').on('click', function () {
+    isUnderline = !isUnderline;
+    $('.text').css('text-decoration', isUnderline ? 'underline' : '')
+})
+
+
+$('#strike-through-text-button').on('click', function () {
+    isStrikeThroughText = !isStrikeThroughText;
+    $('.text').css('text-decoration', isStrikeThroughText ? 'line-through' : '')
+})
+
+
+//text alignment
+$('#text-align-left').on('click', function () {
+    $('#wrapper').css('align-items', 'flex-start');
+})
+
+$('#text-align-center').on('click', function () {
+    $('#wrapper').css('align-items', 'center');
+})
+
+$('#text-align-right').on('click', function () {
+    $('#wrapper').css('align-items', 'flex-end')
+})
+
+//font and size
+$('.dropdown-item-font').on('click', function () {
+    $('.text').css('font-family', $(this).css('font-family'))
+})
+
+$('.dropdown-item-size').on('click', function () {
+    $('.text').css('font-size', $(this).css('font-size'))
+})
+
+$('.color-cell').on('click', function () {
+    $('.text').css('color', $(this).css('background-color'))
+})
+
+$('.background-color-cell').on('click', function () {
+    $('.text').css('background-color', $(this).css('background-color'))
+})
+
+$('.bg-img').on('click', function () {
+    $('#wrapper').css('background-image', $(this).css('background-image'));
+})
