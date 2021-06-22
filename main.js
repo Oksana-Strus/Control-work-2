@@ -223,19 +223,20 @@ $('#text-align-right').on('click', function () {
 
 //font and size
 $('.dropdown-item-font').on('click', function () {
-    $('.text').css('font-family', $(this).css('font-family'))
+    $('.content').css('font-family', $(this).css('font-family'))
 })
 
 $('.dropdown-item-size').on('click', function () {
-    $('.text').css('font-size', $(this).css('font-size'))
+    $('.content').css('font-size', $(this).css('font-size'));
+
 })
 
 $('.color-cell').on('click', function () {
-    $('.text').css('color', $(this).css('background-color'))
+    $('.content').css('color', $(this).css('background-color'))
 })
 
 $('.background-color-cell').on('click', function () {
-    $('.text').css('background-color', $(this).css('background-color'))
+    $('.content').css('background-color', $(this).css('background-color'))
 })
 
 $('.bg-img').on('click', function () {
