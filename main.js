@@ -36,7 +36,7 @@ $('#uploadFile').on('change', function (event) {
     let file = this.files[0];
     let reader = new FileReader();
     reader.onloadend = function () {
-        $('#wrapper').css('background-image', 'url("' + reader.result + '")');
+        $('#content-wrapper').css('background', 'url("' + reader.result + '") no-repeat center');
     }
 
     if (file) {
@@ -45,7 +45,6 @@ $('#uploadFile').on('change', function (event) {
 });
 
 $('#btnSignOut').on('click', function () {
-    console.log('lllllllll')
     $("#btn-close-lock").css('display', 'block');
     $("#btn-open-lock").css('display', 'none');
     $('#open-tables').attr('disabled', true);
@@ -53,17 +52,17 @@ $('#btnSignOut').on('click', function () {
 })
 
 $('#open-tables').on('click', function () {
-    $(".content").css('display', 'none');
+    $("#content-wrapper").css('display', 'none');
     $("#edit-content").css('display', 'block');
-    $('#edit-content').val($(".content").html());
+    $('#edit-content').val($("#content").html());
     $('#edit-toolbar').removeClass('hidden-toolbar');
     $('#style-toolbar').addClass('hidden-toolbar');
 })
 
 $('#save-changes-btn').on('click', function () {
     $("#edit-content").css('display', 'none');
-    $(".content").css('display', 'block');
-    $(".content").html($('#edit-content').val());
+    $("#content-wrapper").css('display', 'flex');
+    $("#content").html($('#edit-content').val());
 
     $('#edit-toolbar').addClass('hidden-toolbar');
     $('#style-toolbar').removeClass('hidden-toolbar');
@@ -210,35 +209,37 @@ $('#strike-through-text-button').on('click', function () {
 
 //text alignment
 $('#text-align-left').on('click', function () {
-    $('#wrapper').css('align-items', 'flex-start');
+    $('#content-wrapper').css('align-items', 'flex-start');
 })
 
 $('#text-align-center').on('click', function () {
-    $('#wrapper').css('align-items', 'center');
+    $('#content-wrapper').css('align-items', 'center');
 })
 
 $('#text-align-right').on('click', function () {
-    $('#wrapper').css('align-items', 'flex-end')
+    $('#content-wrapper').css('align-items', 'flex-end')
 })
 
 //font and size
 $('.dropdown-item-font').on('click', function () {
-    $('.content').css('font-family', $(this).css('font-family'))
+    $('#content').css('font-family', $(this).css('font-family'))
 })
 
 $('.dropdown-item-size').on('click', function () {
-    $('.content').css('font-size', $(this).css('font-size'));
+    $('#content').css('font-size', $(this).css('font-size'));
 
 })
 
 $('.color-cell').on('click', function () {
-    $('.content').css('color', $(this).css('background-color'))
+    console.log($(this).css('background-color'));
+    $('#content').css('color', $(this).css('background-color'))
 })
 
 $('.background-color-cell').on('click', function () {
-    $('.content').css('background-color', $(this).css('background-color'))
+    $('#content-wrapper').css('background', $(this).css('background-color'))
 })
 
 $('.bg-img').on('click', function () {
-    $('#wrapper').css('background-image', $(this).css('background-image'));
+    let bg = $(this).css('background-image') + 'center center / cover no-repeat';
+    $('#content-wrapper').css('background', bg);
 })
